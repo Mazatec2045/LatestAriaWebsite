@@ -1,3 +1,4 @@
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
@@ -9,7 +10,9 @@ import Navbar from "./components/Navbar";
 import Tech from "./components/Tech";
 import Works from "./components/Works";
 import Contact from "./components/Contact";
-import CentralModel from "./components/canvas/CentralModel";
+import CanvasLoader from "./components/Loader";
+
+const CentralModel = lazy(() => import("./components/canvas/CentralModel"));
 
 const App = () => {
   return (
@@ -17,12 +20,14 @@ const App = () => {
       {/* 3D Canvas Background Layer */}
       <div className="fixed inset-0 z-0 bg-black pointer-events-none">
         <Canvas shadows camera={{ position: [0, 0, 8], fov: 45 }}>
-          <color attach="background" args={['#000000']} />
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
-          <Environment preset="city" />
-          
-          <CentralModel />
+          <Suspense fallback={<CanvasLoader />}>
+            <color attach="background" args={['#000000']} />
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[10, 10, 5]} intensity={1} />
+            <Environment preset="city" />
+            
+            <CentralModel />
+          </Suspense>
         </Canvas>
       </div>
 
