@@ -26,62 +26,83 @@ const Contact = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-            alert("Thank you! Your message has been sent!");
+            alert("Inquiry received. We will be in touch shortly.");
             setForm({ name: "", email: "", message: "" });
-        }, 1000);
+        }, 1500);
     };
 
     return (
-        <div className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}>
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-16 overflow-hidden">
             <motion.div
                 variants={slideIn("left", "tween", 0.2, 1)}
-                className='flex-[0.75] mc-panel p-8'
+                className="flex-[0.6] glass-panel p-8 md:p-12"
             >
                 <p className={styles.sectionSubText}>Get in touch</p>
-                <h3 className={styles.sectionHeadText}>Drop a Message in the Chest.</h3>
+                <h3 className={styles.sectionHeadText}>Connect.</h3>
 
-                <form ref={formRef} onSubmit={handleSubmit} className='mt-12 flex flex-col gap-8'>
-                    <label className='flex flex-col'>
-                        <span className='text-white font-medium mb-4'>Your Name (Username)</span>
+                <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col gap-8">
+                    <label className="flex flex-col">
+                        <span className="text-white/60 font-body text-sm tracking-widest uppercase mb-3">Name</span>
                         <input
-                            type='text' name='name' value={form.name} onChange={handleChange}
-                            placeholder="Steve_123"
-                            className='mc-slot w-full px-4 py-3 text-white outline-none'
+                            type="text" name="name" value={form.name} onChange={handleChange}
+                            placeholder="John Doe"
+                            className="bg-white/5 py-4 px-6 text-white font-body border border-white/10 rounded-lg outline-none focus:border-white/30 transition-colors"
                         />
                     </label>
-                    <label className='flex flex-col'>
-                        <span className='text-white font-medium mb-4'>Your Email</span>
+                    <label className="flex flex-col">
+                        <span className="text-white/60 font-body text-sm tracking-widest uppercase mb-3">Email</span>
                         <input
-                            type='email' name='email' value={form.email} onChange={handleChange}
-                            placeholder="your@email.com"
-                            className='mc-slot w-full px-4 py-3 text-white outline-none'
+                            type="email" name="email" value={form.email} onChange={handleChange}
+                            placeholder="john@example.com"
+                            className="bg-white/5 py-4 px-6 text-white font-body border border-white/10 rounded-lg outline-none focus:border-white/30 transition-colors"
                         />
                     </label>
-                    <label className='flex flex-col'>
-                        <span className='text-white font-medium mb-4'>Your Scroll Message</span>
+                    <label className="flex flex-col">
+                        <span className="text-white/60 font-body text-sm tracking-widest uppercase mb-3">Message</span>
                         <textarea
-                            rows={7} name='message' value={form.message} onChange={handleChange}
-                            placeholder='Hello Aria! I love your pink castle...'
-                            className='mc-slot w-full p-4 text-white outline-none resize-none'
+                            rows={5} name="message" value={form.message} onChange={handleChange}
+                            placeholder="How can we help?"
+                            className="bg-white/5 py-4 px-6 text-white font-body border border-white/10 rounded-lg outline-none resize-none focus:border-white/30 transition-colors"
                         />
                     </label>
-                    <button type='submit' className='mc-button w-full py-4 text-xl font-black uppercase tracking-widest'>
-                        {loading ? "Sending..." : "Craft Message 📜"}
+                    <button 
+                        type="submit" 
+                        className="mt-4 bg-white text-black py-4 px-8 font-body font-medium uppercase tracking-widest rounded-lg hover:bg-white/90 transition-colors flex justify-center items-center"
+                    >
+                        {loading ? (
+                            <span className="animate-pulse">Sending...</span>
+                        ) : (
+                            "Submit Inquiry"
+                        )}
                     </button>
                 </form>
             </motion.div>
 
             <motion.div
                 variants={slideIn("right", "tween", 0.2, 1)}
-                className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px] flex items-center justify-center'
+                className="flex-[0.4] flex flex-col justify-center items-start pt-10 md:pt-0"
             >
-                {/* Minecraft Chest decoration instead of 3D Earth */}
-                <div className='flex flex-col items-center gap-4'>
-                    <div className='relative w-48 h-48 bg-[#866043] border-4 border-[#373737] shadow-[inset_-8px_-8px_0px_#5d4037] flex items-center justify-center'>
-                        <div className='w-8 h-16 bg-[#c6c6c6] border-2 border-[#373737]' />
+                <h4 className="text-white font-display text-3xl mb-6">Let's build something extraordinary.</h4>
+                <p className="text-secondary font-body font-light leading-relaxed mb-10">
+                    Whether you have a fully formed product idea or just a spark of inspiration, 
+                    our team is ready to help you bring it to life. Reach out and let's start the conversation.
+                </p>
+                
+                <div className="flex flex-col gap-4 w-full">
+                    <div className="glass-panel p-6 w-full flex items-center gap-4">
+                        <span className="material-symbols-outlined text-white/50">mail</span>
+                        <div>
+                            <p className="text-white/50 text-xs uppercase tracking-widest">Email</p>
+                            <p className="text-white font-body mt-1">hello@oria.studio</p>
+                        </div>
                     </div>
-                    <p className='text-[#ee2b8c] font-bold pixel-text text-xl'>Message Chest</p>
-                    <p className='text-[#c6c6c6] text-center text-sm'>Leave a message for Aria!</p>
+                    <div className="glass-panel p-6 w-full flex items-center gap-4">
+                        <span className="material-symbols-outlined text-white/50">location_on</span>
+                        <div>
+                            <p className="text-white/50 text-xs uppercase tracking-widest">Location</p>
+                            <p className="text-white font-body mt-1">Global Remote</p>
+                        </div>
+                    </div>
                 </div>
             </motion.div>
         </div>

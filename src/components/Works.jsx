@@ -3,7 +3,6 @@ import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
-// import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
@@ -16,42 +15,41 @@ const ProjectCard = ({
     source_code_link,
 }) => {
     return (
-        <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
+        <motion.div variants={fadeIn("up", "spring", index * 0.2, 0.75)} className="flex-1 w-full sm:w-[360px]">
             <Tilt
-                tiltMaxAngleX={15}
-                tiltMaxAngleY={15}
-                scale={1.05}
+                tiltMaxAngleX={10}
+                tiltMaxAngleY={10}
+                scale={1.02}
                 transitionSpeed={450}
-                className='mc-panel p-2 sm:w-[360px] w-full bg-[#c6c6c6]'
+                className="glass-panel p-6 h-full flex flex-col group hover:border-white/20 transition-colors"
             >
-                {/* Minecraft Item Frame Style Container */}
-                <div className='relative w-full h-[230px] bg-[#8b8b8b] border-4 border-[#373737] shadow-[inset_-4px_-4px_0px_rgba(0,0,0,0.2)] flex items-center justify-center overflow-hidden group'>
-                    <div className="text-6xl group-hover:scale-110 transition-transform">
+                <div className="relative w-full h-[230px] rounded-lg overflow-hidden bg-white/5 flex items-center justify-center">
+                    <div className="text-6xl text-white/50 group-hover:text-white group-hover:scale-110 transition-all duration-500">
                         {index === 0 ? "🎨" : "☁️"}
                     </div>
                     
-                    <div className='absolute inset-0 flex justify-end m-3 card-img_hover'>
-                        <div
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center backdrop-blur-sm">
+                        <button
                             onClick={() => window.open(source_code_link, "_blank")}
-                            className='mc-button w-10 h-10 flex justify-center items-center cursor-pointer bg-[#373737] border-white/20'
+                            className="px-6 py-2 rounded-full border border-white/50 text-white font-body text-sm hover:bg-white hover:text-black transition-colors"
                         >
-                            <span className="text-white text-xs font-bold">VIEW</span>
-                        </div>
+                            Explore
+                        </button>
                     </div>
                 </div>
 
-                <div className='mt-5 px-2 pb-2'>
-                    <h3 className='text-[#373737] font-black text-[24px] pixel-text'>{name}</h3>
-                    <p className='mt-2 text-[#555555] text-[16px] leading-tight font-bold'>{description}</p>
+                <div className="mt-6 flex flex-col flex-grow">
+                    <h3 className="text-white font-display font-medium text-2xl">{name}</h3>
+                    <p className="mt-3 text-secondary font-body font-light text-sm leading-relaxed flex-grow">{description}</p>
                     
-                    <div className='mt-4 flex flex-wrap gap-2'>
+                    <div className="mt-6 flex flex-wrap gap-3">
                         {tags.map((tag) => (
-                            <p
+                            <span
                                 key={`${name}-${tag.name}`}
-                                className={`text-[14px] font-black uppercase ${tag.color}`}
+                                className="text-xs font-body tracking-wider uppercase text-white/40 border border-white/10 px-3 py-1 rounded-full"
                             >
-                                #{tag.name}
-                            </p>
+                                {tag.name}
+                            </span>
                         ))}
                     </div>
                 </div>
@@ -62,31 +60,29 @@ const ProjectCard = ({
 
 const Works = () => {
     return (
-        <>
+        <div className="max-w-5xl mx-auto">
             <motion.div variants={textVariant()}>
-                <p className={`${styles.sectionSubText} `}>My work</p>
-                <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
+                <p className={`${styles.sectionSubText}`}>The Portfolio</p>
+                <h2 className={`${styles.sectionHeadText}`}>Creations.</h2>
             </motion.div>
 
-            <div className='w-full flex'>
+            <div className="w-full flex">
                 <motion.p
                     variants={fadeIn("", "", 0.1, 1)}
-                    className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'
+                    className="mt-6 text-secondary text-lg md:text-xl font-body font-light max-w-3xl leading-relaxed"
                 >
-                    Following projects showcases my skills and experience through
-                    real-world examples of my work. Each project is briefly described with
-                    links to code repositories and live demos in it. It reflects my
-                    ability to solve complex problems, work with different technologies,
-                    and manage projects effectively.
+                    The following projects showcase our capabilities through real-world applications. 
+                    Each represents a unique challenge solved through a blend of intuitive design and robust engineering, 
+                    pushing the boundaries of what is possible on the web.
                 </motion.p>
             </div>
 
-            <div className='mt-20 flex flex-wrap gap-7'>
+            <div className="mt-20 flex flex-wrap justify-center gap-8">
                 {projects.map((project, index) => (
                     <ProjectCard key={`project-${index}`} index={index} {...project} />
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 

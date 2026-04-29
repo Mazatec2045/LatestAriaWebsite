@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { styles } from "../styles";
 import { navLinks } from "../constants";
 
-const Navbar = ({ isNight, setIsNight }) => {
+const Navbar = () => {
     const [active, setActive] = useState("");
     const [toggle, setToggle] = useState(false);
     const [scrolled, setScrolled] = useState(false);
@@ -12,7 +12,7 @@ const Navbar = ({ isNight, setIsNight }) => {
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.scrollY;
-            if (scrollTop > 100) {
+            if (scrollTop > 50) {
                 setScrolled(true);
             } else {
                 setScrolled(false);
@@ -26,34 +26,32 @@ const Navbar = ({ isNight, setIsNight }) => {
 
     return (
         <nav
-            className={`${styles.paddingX
-                } w-full flex items-center py-5 fixed top-0 z-20 ${scrolled ? "bg-background-light mc-panel" : "bg-transparent"
-                }`}
+            className={`${styles.paddingX} w-full flex items-center py-6 fixed top-0 z-50 transition-all duration-300 ${scrolled ? "bg-black/50 backdrop-blur-md border-b border-white/5" : "bg-transparent"}`}
         >
-            <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
+            <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
                 <Link
-                    to='/'
-                    className='flex items-center gap-2'
+                    to="/"
+                    className="flex items-center gap-4 group"
                     onClick={() => {
                         setActive("");
                         window.scrollTo(0, 0);
                     }}
                 >
-                    <div className="w-10 h-10 bg-primary border-4 border-white shadow-[4px_4px_0px_rgba(0,0,0,0.2)] flex items-center justify-center">
-                        <span className="text-white text-2xl font-bold">A</span>
+                    <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center group-hover:border-white transition-colors">
+                        <span className="text-white text-xl font-display font-medium">O</span>
                     </div>
-                    <h1 className="text-[#3f3f3f] text-2xl font-black leading-none tracking-tighter uppercase italic pixel-text">
-                        Aria Kate's <span className="text-primary">World</span>
+                    <h1 className="text-white text-xl font-display font-medium tracking-widest uppercase">
+                        ORIA
                     </h1>
                 </Link>
 
-                <div className="flex items-center gap-4 sm:gap-6">
-                    <ul className='list-none hidden sm:flex flex-row gap-10'>
+                <div className="flex items-center gap-8">
+                    <ul className="list-none hidden sm:flex flex-row gap-8">
                         {navLinks.map((nav) => (
                             <li
                                 key={nav.id}
-                                className={`${active === nav.title ? "text-white" : "text-secondary"
-                                    } hover:text-white text-[18px] font-medium cursor-pointer`}
+                                className={`${active === nav.title ? "text-white" : "text-white/50"
+                                    } hover:text-white text-xs font-body uppercase tracking-widest transition-colors cursor-pointer`}
                                 onClick={() => setActive(nav.title)}
                             >
                                 <a href={`#${nav.id}`}>{nav.title}</a>
@@ -61,30 +59,24 @@ const Navbar = ({ isNight, setIsNight }) => {
                         ))}
                     </ul>
 
-                    {/* Theme Toggle */}
-                    <button 
-                        onClick={() => setIsNight(!isNight)}
-                        className="mc-button p-2 text-xl sm:text-2xl flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12"
-                    >
-                        {isNight ? "🌙" : "☀️"}
-                    </button>
-
-                    <div className='sm:hidden flex items-center'>
-                        {/* Placeholder for menu icon */}
+                    {/* Mobile Menu Toggle */}
+                    <div className="sm:hidden flex items-center">
                         <div
-                            className='w-[36px] h-[36px] cursor-pointer bg-[#c6c6c6] border-2 border-white text-[#3f3f3f] flex items-center justify-center font-bold pixel-text text-xl shadow-[2px_2px_0px_rgba(0,0,0,0.2)]'
+                            className="w-10 h-10 cursor-pointer flex items-center justify-center text-white/80 hover:text-white transition-colors"
                             onClick={() => setToggle(!toggle)}
-                        >M</div>
+                        >
+                            <span className="material-symbols-outlined text-2xl">{toggle ? "close" : "menu"}</span>
+                        </div>
 
                         <div
                             className={`${!toggle ? "hidden" : "flex"
-                                } p-6 bg-[#c6c6c6] absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl border-4 border-white shadow-[4px_4px_0px_rgba(0,0,0,0.2)]`}
+                                } p-6 bg-black/90 backdrop-blur-xl absolute top-20 right-0 mx-4 my-2 min-w-[200px] z-10 rounded-2xl border border-white/10 shadow-2xl`}
                         >
-                            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
+                            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-6">
                                 {navLinks.map((nav) => (
                                     <li
                                         key={nav.id}
-                                        className={`font-poppins font-medium cursor-pointer text-[16px] pixel-text ${active === nav.title ? "text-primary" : "text-[#3f3f3f]"
+                                        className={`font-body font-light cursor-pointer text-sm uppercase tracking-widest ${active === nav.title ? "text-white" : "text-white/50"
                                             }`}
                                         onClick={() => {
                                             setToggle(!toggle);

@@ -5,31 +5,26 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#ee2b8c",
-        secondary: "#aaa6c3",
-        tertiary: "#151030",
-        "black-100": "#100d25",
-        "black-200": "#090325",
-        "white-100": "#f3f3f3",
-        "background-light": "#87ceeb", // Minecraft sky blue
-        "mc-gray": "#c6c6c6",
-        "mc-dark-gray": "#555555",
-        "mc-light-gray": "#ffffff",
-        "mc-dirt": "#866043",
-        "mc-grass": "#7db23e",
+        primary: "#ffffff",
+        secondary: "#a1a1aa",
+        tertiary: "#18181b",
+        "black-100": "#09090b",
+        "black-200": "#000000",
+        "white-100": "#f4f4f5",
+        accent: "#38bdf8",
       },
       fontFamily: {
         "display": ["Space Grotesk", "sans-serif"],
-        "poppins": ["Poppins", "sans-serif"],
+        "body": ["Inter", "sans-serif"],
       },
       boxShadow: {
-        card: "0px 35px 120px -15px #211e35",
+        glass: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
       },
       screens: {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/src/assets/herobg.png')",
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
     },
   },

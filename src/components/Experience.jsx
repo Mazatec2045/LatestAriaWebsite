@@ -8,34 +8,32 @@ import { textVariant, fadeIn } from "../utils/motion";
 const ExperienceCard = ({ experience, index }) => {
     return (
         <motion.div 
-            variants={fadeIn("up", "spring", index * 0.5, 0.75)}
-            className="relative flex flex-col md:flex-row gap-10 mb-20 last:mb-0"
+            variants={fadeIn("up", "spring", index * 0.2, 0.75)}
+            className="relative flex flex-col md:flex-row gap-8 mb-16 last:mb-0 group"
         >
             {/* Timeline Line & Dot */}
             <div className="hidden md:flex flex-col items-center">
-                <div className="w-10 h-10 mc-panel flex items-center justify-center bg-white z-10">
-                    <span className="text-black font-bold text-xl">{experience.company_name[0]}</span>
-                </div>
-                <div className="w-2 h-full bg-[#373737] border-x-2 border-white/20" />
+                <div className="w-4 h-4 rounded-full border-2 border-white/30 bg-black-100 group-hover:border-white group-hover:scale-125 transition-all z-10" />
+                <div className="w-[1px] h-full bg-gradient-to-b from-white/20 to-transparent mt-2" />
             </div>
 
             {/* Content Card */}
-            <div className="flex-1 mc-panel p-8 bg-[#1d1836]/80 backdrop-blur-sm hover:translate-x-2 transition-transform cursor-default">
-                <div className="flex justify-between items-start flex-wrap gap-2">
+            <div className="flex-1 glass-panel p-8 md:p-10 hover:bg-white/[0.02] transition-colors">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                     <div>
-                        <h3 className='text-white text-[28px] font-black pixel-text'>{experience.title}</h3>
-                        <p className='text-[#ee2b8c] text-[18px] font-bold mt-1 uppercase'>{experience.company_name}</p>
+                        <h3 className="text-white text-2xl md:text-3xl font-display font-medium">{experience.title}</h3>
+                        <p className="text-secondary text-sm md:text-base font-body tracking-widest uppercase mt-2">{experience.company_name}</p>
                     </div>
-                    <div className="mc-button bg-[#373737] text-white border-white/40 cursor-default">
+                    <div className="text-white/40 font-body text-sm font-light border border-white/10 rounded-full px-4 py-1">
                         {experience.date}
                     </div>
                 </div>
 
-                <ul className='mt-8 list-none space-y-4'>
+                <ul className="mt-8 list-none space-y-4">
                     {experience.points.map((point, idx) => (
-                        <li key={`point-${idx}`} className='text-white-100 text-[18px] flex gap-3'>
-                            <span className="text-[#ee2b8c]">⛏️</span>
-                            <span className="leading-tight">{point}</span>
+                        <li key={`point-${idx}`} className="text-secondary font-body font-light text-base flex gap-4 items-start">
+                            <span className="w-1.5 h-1.5 rounded-full bg-white/30 mt-2.5 shrink-0" />
+                            <span className="leading-relaxed">{point}</span>
                         </li>
                     ))}
                 </ul>
@@ -46,17 +44,17 @@ const ExperienceCard = ({ experience, index }) => {
 
 const Experience = () => {
     return (
-        <>
+        <div className="max-w-5xl mx-auto">
             <motion.div variants={textVariant()}>
                 <p className={`${styles.sectionSubText} text-center`}>
-                    My Journey in the Overworld
+                    The Evolution
                 </p>
-                <h2 className={`${styles.sectionHeadText} text-center mb-16`}>
-                    Adventure Log.
+                <h2 className={`${styles.sectionHeadText} text-center mb-20`}>
+                    Journey.
                 </h2>
             </motion.div>
 
-            <div className='max-w-4xl mx-auto'>
+            <div className="max-w-4xl mx-auto">
                 {experiences.map((experience, index) => (
                     <ExperienceCard 
                         key={`experience-${index}`} 
@@ -65,7 +63,7 @@ const Experience = () => {
                     />
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
