@@ -47,7 +47,7 @@ const WardrobeDeconstruct = ({ isExploded, setIsExploded, setCameraAngle }) => {
       image: "/aria-left.jpg",
       cropPosition: "50% 48%",
       cropScale: "scale-110",
-      viewAngle: "wing",
+      viewAngle: "left",
     },
     {
       id: "04",
@@ -62,7 +62,7 @@ const WardrobeDeconstruct = ({ isExploded, setIsExploded, setCameraAngle }) => {
       image: "/aria-right.jpg",
       cropPosition: "50% 82%",
       cropScale: "scale-125",
-      viewAngle: "front",
+      viewAngle: "right",
     },
   ];
 

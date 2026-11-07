@@ -12,6 +12,11 @@ export default defineConfig([
     plugins: {
       react,
     },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     extends: [
       js.configs.recommended,
       react.configs.flat.recommended,

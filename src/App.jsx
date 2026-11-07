@@ -50,6 +50,14 @@ class ErrorBoundary extends React.Component {
 const App = () => {
   const [isExploded, setIsExploded] = useState(false);
   const [cameraAngle, setCameraAngle] = useState("front");
+  const [activeEmote, setActiveEmote] = useState(null);
+
+  const triggerEmote = (emoteName) => {
+    setActiveEmote(emoteName);
+    setTimeout(() => {
+      setActiveEmote((prev) => (prev === emoteName ? null : prev));
+    }, 2600);
+  };
 
   return (
     <ErrorBoundary>
@@ -69,11 +77,15 @@ const App = () => {
 
           {/* Fixed 3D Avatar Scene in Background */}
           <div className="fixed inset-0 z-0 pointer-events-none">
-            <AriaRunwayAvatar isExploded={isExploded} cameraAngle={cameraAngle} />
+            <AriaRunwayAvatar
+              isExploded={isExploded}
+              cameraAngle={cameraAngle}
+              activeEmote={activeEmote}
+            />
           </div>
 
           {/* Clean Top Navigation */}
-          <Navbar />
+          <Navbar onCheer={() => triggerEmote("wave")} />
 
           {/* Main Content Container */}
           <main className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-8 flex flex-col items-center gap-32 pt-24 pb-36">
@@ -82,6 +94,8 @@ const App = () => {
               setIsExploded={setIsExploded}
               cameraAngle={cameraAngle}
               setCameraAngle={setCameraAngle}
+              activeEmote={activeEmote}
+              triggerEmote={triggerEmote}
             />
             <WardrobeDeconstruct
               isExploded={isExploded}

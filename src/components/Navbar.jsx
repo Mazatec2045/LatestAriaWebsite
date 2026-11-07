@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ onCheer }) => {
   const [activeSection, setActiveSection] = useState("runway");
   const [sparkCount, setSparkCount] = useState(1428);
   const [justSparked, setJustSparked] = useState(false);
@@ -16,6 +16,7 @@ const Navbar = () => {
   const handleSendSpark = () => {
     setSparkCount((prev) => prev + 1);
     setJustSparked(true);
+    if (onCheer) onCheer();
     setTimeout(() => setJustSparked(false), 450);
   };
 
