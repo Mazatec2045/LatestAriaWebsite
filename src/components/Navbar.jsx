@@ -1,98 +1,93 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { styles } from "../styles";
-import { navLinks } from "../constants";
+import React, { useState } from "react";
 
 const Navbar = () => {
-    const [active, setActive] = useState("");
-    const [toggle, setToggle] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("runway");
+  const [sparkCount, setSparkCount] = useState(1428);
+  const [justSparked, setJustSparked] = useState(false);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY;
-            if (scrollTop > 50) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
-        };
+  const navLinks = [
+    { id: "runway", label: "✨ Home" },
+    { id: "wardrobe-deconstruct", label: "🦖 My Outfit" },
+    { id: "rivals-arena", label: "🎯 Rivals" },
+    { id: "1-speedway", label: "⚡ Speedway" },
+    { id: "robux-vault", label: "💎 Vault" },
+  ];
 
-        window.addEventListener("scroll", handleScroll);
+  const handleSendSpark = () => {
+    setSparkCount((prev) => prev + 1);
+    setJustSparked(true);
+    setTimeout(() => setJustSparked(false), 450);
+  };
 
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    return (
-        <nav
-            className={`${styles.paddingX} w-full flex items-center py-6 fixed top-0 z-50 transition-all duration-300 ${scrolled ? "bg-black/50 backdrop-blur-md border-b border-white/5" : "bg-transparent"}`}
+  return (
+    <header className="fixed top-0 left-0 w-full z-50 py-3.5 px-4 sm:px-8 transition-all">
+      <div className="max-w-6xl mx-auto bg-[#faf7f2]/88 backdrop-blur-2xl border border-[#dfd3c2] rounded-3xl shadow-[0_8px_28px_rgba(74,51,31,0.08)] px-5 sm:px-7 py-2.5 flex items-center justify-between gap-4">
+        {/* Clean Logo with Avatar Thumbnail */}
+        <a
+          href="#runway"
+          className="font-display text-xl sm:text-2xl tracking-tight text-[#2d1e14] font-bold flex items-center gap-2.5 hover:text-[#a6413d] transition-colors shrink-0"
         >
-            <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-                <Link
-                    to="/"
-                    className="flex items-center gap-4 group"
-                    onClick={() => {
-                        setActive("");
-                        window.scrollTo(0, 0);
-                    }}
-                >
-                    <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center group-hover:border-white transition-colors">
-                        <span className="text-white text-xl font-display font-medium">O</span>
-                    </div>
-                    <h1 className="text-white text-xl font-display font-medium tracking-widest uppercase">
-                        ORIA
-                    </h1>
-                </Link>
+          <div className="w-9 h-9 rounded-2xl overflow-hidden border-2 border-[#c7b097] bg-[#f3ece1] shadow-xs">
+            <img
+              src="/aria-front.jpg"
+              alt="Aria Explorer Avatar"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <span>ARIA</span>
+          <span className="px-2 py-0.5 bg-[#fff01f] text-[#2d1e14] text-xs rounded-lg font-extrabold border border-[#e5c200]">
+            !
+          </span>
+        </a>
 
-                <div className="flex items-center gap-8">
-                    <ul className="list-none hidden sm:flex flex-row gap-8">
-                        {navLinks.map((nav) => (
-                            <li
-                                key={nav.id}
-                                className={`${active === nav.title ? "text-white" : "text-white/50"
-                                    } hover:text-white text-xs font-body uppercase tracking-widest transition-colors cursor-pointer`}
-                                onClick={() => setActive(nav.title)}
-                            >
-                                <a href={`#${nav.id}`}>{nav.title}</a>
-                            </li>
-                        ))}
-                    </ul>
-
-                    {/* Mobile Menu Toggle */}
-                    <div className="sm:hidden flex items-center">
-                        <div
-                            className="w-10 h-10 cursor-pointer flex items-center justify-center text-white/80 hover:text-white transition-colors"
-                            onClick={() => setToggle(!toggle)}
-                        >
-                            <span className="material-symbols-outlined text-2xl">{toggle ? "close" : "menu"}</span>
-                        </div>
-
-                        <div
-                            className={`${!toggle ? "hidden" : "flex"
-                                } p-6 bg-black/90 backdrop-blur-xl absolute top-20 right-0 mx-4 my-2 min-w-[200px] z-10 rounded-2xl border border-white/10 shadow-2xl`}
-                        >
-                            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-6">
-                                {navLinks.map((nav) => (
-                                    <li
-                                        key={nav.id}
-                                        className={`font-body font-light cursor-pointer text-sm uppercase tracking-widest ${active === nav.title ? "text-white" : "text-white/50"
-                                            }`}
-                                        onClick={() => {
-                                            setToggle(!toggle);
-                                            setActive(nav.title);
-                                        }}
-                                    >
-                                        <a href={`#${nav.id}`}>{nav.title}</a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        {/* Center Nav Links */}
+        <nav className="hidden md:flex items-center gap-1 p-1 bg-[#f1ebe0] rounded-2xl border border-[#dfd3c2]">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => setActiveSection(link.id)}
+                className={`px-4 py-1.5 text-xs sm:text-sm transition-all rounded-xl font-bold ${
+                  isActive
+                    ? "bg-[#4a331f] text-[#faf7f2] shadow-xs"
+                    : "text-[#6e5540] hover:text-[#2d1e14] hover:bg-white/80"
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
         </nav>
-    );
+
+        {/* Right Yellow Spark Cheer & Play Button */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          <button
+            onClick={handleSendSpark}
+            type="button"
+            title="Send Aria a Golden Cheer!"
+            className={`px-3.5 py-2 bg-[#fff9db] hover:bg-[#fff0a8] border border-[#e6cc65] rounded-2xl flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-[#4a331f] transition-all cursor-pointer ${
+              justSparked ? "scale-110 bg-[#fff01f]" : "scale-100"
+            }`}
+          >
+            <span className="text-sm leading-none">⭐</span>
+            <span>{sparkCount.toLocaleString()}</span>
+          </button>
+
+          <a
+            href="https://www.roblox.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-2 bg-[#a6413d] hover:bg-[#4a331f] text-white text-xs sm:text-sm tracking-wide uppercase rounded-2xl transition-all flex items-center gap-1.5 font-extrabold shadow-xs"
+          >
+            <span>ROBLOX</span>
+            <span className="material-symbols-outlined text-[15px]">north_east</span>
+          </a>
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export default Navbar;

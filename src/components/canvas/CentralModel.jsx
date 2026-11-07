@@ -38,7 +38,7 @@ const CentralModel = () => {
   }, []);
 
   // Continuous subtle floating
-  useFrame((state) => {
+  useFrame(() => {
     if (!meshRef.current) return;
     // Add subtle continuous movement on top of scroll animation
   });

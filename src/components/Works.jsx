@@ -21,7 +21,7 @@ const ProjectCard = ({
                 tiltMaxAngleY={10}
                 scale={1.02}
                 transitionSpeed={450}
-                className="glass-panel p-6 h-full flex flex-col group hover:border-white/20 transition-colors"
+                className="glass-panel p-5 sm:p-6 h-full flex flex-col group hover:border-white/20 transition-colors"
             >
                 <div className="relative w-full h-[230px] rounded-lg overflow-hidden bg-white/5 flex items-center justify-center">
                     <div className="text-6xl text-white/50 group-hover:text-white group-hover:scale-110 transition-all duration-500">

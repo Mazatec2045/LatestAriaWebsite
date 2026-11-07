@@ -24,21 +24,21 @@ const Cloud = ({ position, size }) => {
     );
 };
 
+const CLOUD_DATA = Array.from({ length: 15 }, (_, i) => ({
+    position: [
+        ((i * 7) % 40) - 20, // x
+        ((i * 3) % 5) + 5,   // y (high up)
+        ((i * 5) % 10) - 15  // z (in background)
+    ],
+    size: [
+        ((i * 1.3) % 2) + 1, // width
+        0.5,                 // height (thin clouds)
+        ((i * 0.7) % 1) + 0.5 // depth
+    ]
+}));
+
 const Clouds = () => {
-    const cloudData = useMemo(() => {
-        return Array.from({ length: 15 }, () => ({
-            position: [
-                Math.random() * 40 - 20, // x
-                Math.random() * 5 + 5,   // y (high up)
-                Math.random() * 10 - 15  // z (in background)
-            ],
-            size: [
-                Math.random() * 2 + 1, // width
-                0.5,                   // height (thin clouds)
-                Math.random() * 1 + 0.5 // depth
-            ]
-        }));
-    }, []);
+    const cloudData = useMemo(() => CLOUD_DATA, []);
 
     return (
         <group>

@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
-import { styles } from "../styles";
 
 const Hero = () => {
     return (
         <section className="relative w-full h-screen mx-auto flex flex-col items-center justify-center pointer-events-none">
-            <div className="text-center z-10 max-w-5xl mx-auto px-6">
+            <div className="text-center z-10 max-w-5xl mx-auto px-6 sm:px-12">
                 <motion.h1 
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-7xl md:text-[12rem] font-display font-bold text-white leading-none tracking-tighter"
+                    className="text-5xl xs:text-7xl md:text-[10rem] lg:text-[12rem] font-display font-bold text-white leading-none tracking-tighter"
                 >
                     ORIA.
                 </motion.h1>
@@ -17,7 +16,7 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-8 text-xl md:text-3xl text-secondary font-body font-light max-w-2xl mx-auto"
+                    className="mt-8 text-lg sm:text-xl md:text-3xl text-secondary font-body font-light max-w-2xl mx-auto leading-relaxed"
                 >
                     A digital experience, reimagined for the modern era. Proving even the smallest idea can feel extraordinary.
                 </motion.p>

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "arias-project-hub"
+  },
+  "targets": {
+    "arias-project-hub": {
+      "hosting": {
+        "ariawonderland": [
+          "ariawonderland"
+        ]
+      }
+    }
+  }
+}

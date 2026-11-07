@@ -1,23 +1,25 @@
-import { useState, useRef, Suspense, useMemo } from "react";
+import { useRef, Suspense, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
+
+const INITIAL_STARS = (() => {
+    const positions = new Float32Array(5000 * 3);
+    for (let i = 0; i < 5000; i++) {
+        const theta = ((i * 137.5) % 360) * (Math.PI / 180);
+        const phi = Math.acos(2 * ((i % 1000) / 1000) - 1);
+        const r = 1.2 * Math.cbrt(((i * 73) % 1000) / 1000);
+        positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+        positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+        positions[i * 3 + 2] = r * Math.cos(phi);
+    }
+    return positions;
+})();
 
 const Stars = (props) => {
     const ref = useRef();
     
-    // Generate random sphere positions without maath dependency
-    const sphere = useMemo(() => {
-        const positions = new Float32Array(5000 * 3);
-        for (let i = 0; i < 5000; i++) {
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            const r = 1.2 * Math.cbrt(Math.random());
-            positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-            positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-            positions[i * 3 + 2] = r * Math.cos(phi);
-        }
-        return positions;
-    }, []);
+    // Generate sphere positions without maath dependency
+    const sphere = useMemo(() => INITIAL_STARS, []);
 
     useFrame((state, delta) => {
         if (ref.current) {

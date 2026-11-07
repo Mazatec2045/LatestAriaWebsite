@@ -18,7 +18,7 @@ const ExperienceCard = ({ experience, index }) => {
             </div>
 
             {/* Content Card */}
-            <div className="flex-1 glass-panel p-8 md:p-10 hover:bg-white/[0.02] transition-colors">
+            <div className="flex-1 glass-panel p-5 sm:p-8 md:p-10 hover:bg-white/[0.02] transition-colors">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                     <div>
                         <h3 className="text-white text-2xl md:text-3xl font-display font-medium">{experience.title}</h3>

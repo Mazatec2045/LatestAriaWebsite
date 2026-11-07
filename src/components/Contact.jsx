@@ -35,7 +35,7 @@ const Contact = () => {
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-16 overflow-hidden">
             <motion.div
                 variants={slideIn("left", "tween", 0.2, 1)}
-                className="flex-[0.6] glass-panel p-8 md:p-12"
+                className="flex-[0.6] glass-panel p-5 sm:p-8 md:p-12"
             >
                 <p className={styles.sectionSubText}>Get in touch</p>
                 <h3 className={styles.sectionHeadText}>Connect.</h3>
@@ -82,10 +82,10 @@ const Contact = () => {
                 variants={slideIn("right", "tween", 0.2, 1)}
                 className="flex-[0.4] flex flex-col justify-center items-start pt-10 md:pt-0"
             >
-                <h4 className="text-white font-display text-3xl mb-6">Let's build something extraordinary.</h4>
+                <h4 className="text-white font-display text-3xl mb-6">Let&apos;s build something extraordinary.</h4>
                 <p className="text-secondary font-body font-light leading-relaxed mb-10">
                     Whether you have a fully formed product idea or just a spark of inspiration, 
-                    our team is ready to help you bring it to life. Reach out and let's start the conversation.
+                    our team is ready to help you bring it to life. Reach out and let&apos;s start the conversation.
                 </p>
                 
                 <div className="flex flex-col gap-4 w-full">
